@@ -1,6 +1,6 @@
 # urban_cruise
 
-A new Flutter project.
+A new Flutter project on car rental service.
 
 ## Getting Started
 
