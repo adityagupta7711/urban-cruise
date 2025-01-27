@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:urban_cruise/calendarpage.dart';
+import 'package:urban_cruise/notifpage.dart';
+import 'package:urban_cruise/profilepage.dart';
+import 'package:urban_cruise/showroom.dart';
 
 class NavigationItem {
-
   IconData iconData;
+  Widget page;
 
-  NavigationItem(this.iconData);
-
+  NavigationItem(this.iconData, this.page);
 }
 
-List<NavigationItem> getNavigationItemList(){
+List<NavigationItem> getNavigationItemList() {
   return <NavigationItem>[
-    NavigationItem(Icons.home),
-    NavigationItem(Icons.calendar_today),
-    NavigationItem(Icons.notifications),
-    NavigationItem(Icons.person),
+    NavigationItem(Icons.home, Showroom()),
+    NavigationItem(Icons.calendar_today, CalendarPage()),
+    NavigationItem(Icons.notifications, NotificationsPage()),
+    NavigationItem(Icons.person, ProfilePage()),
   ];
 }
 
 class Car {
-
   String brand;
   String model;
   double price;
@@ -26,10 +28,9 @@ class Car {
   List<String> images;
 
   Car(this.brand, this.model, this.price, this.condition, this.images);
-
 }
 
-List<Car> getCarList(){
+List<Car> getCarList() {
   return <Car>[
     Car(
       "Land Rover",
@@ -142,17 +143,14 @@ List<Car> getCarList(){
 }
 
 class Dealer {
-
   String name;
   int offers;
   String image;
 
-
   Dealer(this.name, this.offers, this.image);
-
 }
 
-List<Dealer> getDealerList(){
+List<Dealer> getDealerList() {
   return <Dealer>[
     Dealer(
       "Hertz",
@@ -173,14 +171,12 @@ List<Dealer> getDealerList(){
 }
 
 class Filter {
-
   String name;
 
   Filter(this.name);
-
 }
 
-List<Filter> getFilterList(){
+List<Filter> getFilterList() {
   return <Filter>[
     Filter("Best Match"),
     Filter("Highest Price"),
