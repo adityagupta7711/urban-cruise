@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:urban_cruise/calendarpage.dart';
 import 'package:urban_cruise/constants.dart';
 import 'package:urban_cruise/data.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,8 @@ import 'package:urban_cruise/car_widget.dart';
 import 'package:urban_cruise/dealer_widget.dart';
 import 'package:urban_cruise/available_cars.dart';
 import 'package:urban_cruise/book_car.dart';
+import 'package:urban_cruise/notifpage.dart';
+import 'package:urban_cruise/profilepage.dart';
 
 class Showroom extends StatefulWidget {
   const Showroom({super.key});
@@ -36,15 +39,15 @@ class _ShowroomState extends State<Showroom> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 1,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
         ),
         title: Text(
-          "Urban Cruise: Rent cars",
+          "Urban Cruise",
           style: GoogleFonts.mulish(
-            fontSize: 28,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
@@ -52,14 +55,113 @@ class _ShowroomState extends State<Showroom> {
         centerTitle: false,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Icon(
-              Icons.menu,
-              color: Colors.black,
-              size: 28,
+            padding: EdgeInsets.only(right: 16), // Corrected padding
+            child: IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: Colors
+                    .black, // Set the color to black or any color you prefer
+                size: 0,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
-          )
+          ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage('assets/images/user.png'),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Aditya Gupta',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
+                    'adityag@gmail.com',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Showroom()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('Calendar'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CalendarPage()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.notifications),
+              title: Text('Notifications'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationsPage()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Navigate to Settings
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              onTap: () {
+                // Handle Logout
+              },
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Version 1.0.0',
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ),
+          ],
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -319,11 +421,10 @@ class _ShowroomState extends State<Showroom> {
   Widget buildNavigationItem(NavigationItem item) {
     return GestureDetector(
       onTap: () {
-            Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => item.page),
-      );
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => item.page),
+        );
       },
       child: SizedBox(
         width: 50,

@@ -108,13 +108,17 @@ class _AvailableCarsState extends State<AvailableCars> {
         decoration: BoxDecoration(
           color: Colors.white,
         ),
-        child: Row(
-          children: [
-            buildFilterIcon(),
-            Row(
-              children: buildFilters(),
-            ),
-          ],
+
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              buildFilterIcon(),
+              Row(
+                children: buildFilters(),
+              ),
+            ],
+          ),
         ),
       ),
     );

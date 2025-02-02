@@ -3,7 +3,6 @@ import 'package:urban_cruise/constants.dart';
 import 'package:urban_cruise/data.dart';
 
 class BookCar extends StatefulWidget {
-
   final Car car;
 
   const BookCar({super.key, required this.car});
@@ -13,10 +12,9 @@ class BookCar extends StatefulWidget {
 }
 
 class _BookCarState extends State<BookCar> {
-
   int _currentImage = 0;
 
-  List<Widget> buildPageIndicator(){
+  List<Widget> buildPageIndicator() {
     List<Widget> list = [];
     for (var i = 0; i < widget.car.images.length; i++) {
       list.add(buildIndicator(i == _currentImage));
@@ -24,7 +22,7 @@ class _BookCarState extends State<BookCar> {
     return list;
   }
 
-  Widget buildIndicator(bool isActive){
+  Widget buildIndicator(bool isActive) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
       margin: EdgeInsets.symmetric(horizontal: 6),
@@ -49,68 +47,22 @@ class _BookCarState extends State<BookCar> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-
                             GestureDetector(
                               onTap: () {
                                 Navigator.pop(context);
                               },
                               child: Container(
-                                width: 45,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  border: Border.all(
-                                    color: Color.fromRGBO(220, 220, 220, 1),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Icon(
-                                  Icons.keyboard_arrow_left,
-                                  color: Colors.black,
-                                  size: 28,
-                                )
-                              ),
-                            ),
-
-                            Row(
-                              children: [
-
-                                Container(
-                                  width: 45,
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                    color: kPrimaryColor,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(15),
-                                    ),
-                                  ),
-                                  child: Icon(
-                                    Icons.bookmark_border,
-                                    color: Colors.white,
-                                    size: 22,
-                                  )
-                                ),
-
-                                SizedBox(
-                                  width: 16,
-                                ),
-
-                                Container(
                                   width: 45,
                                   height: 45,
                                   decoration: BoxDecoration(
@@ -123,23 +75,55 @@ class _BookCarState extends State<BookCar> {
                                     ),
                                   ),
                                   child: Icon(
-                                    Icons.share,
+                                    Icons.keyboard_arrow_left,
                                     color: Colors.black,
-                                    size: 22,
-                                  )
+                                    size: 28,
+                                  )),
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: kPrimaryColor,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: Icon(
+                                      Icons.bookmark_border,
+                                      color: Colors.white,
+                                      size: 22,
+                                    )),
+                                SizedBox(
+                                  width: 16,
                                 ),
-
+                                Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(220, 220, 220, 1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Icon(
+                                      Icons.share,
+                                      color: Colors.black,
+                                      size: 22,
+                                    )),
                               ],
                             ),
-
                           ],
                         ),
                       ),
-
                       SizedBox(
                         height: 16,
                       ),
-
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
@@ -151,11 +135,9 @@ class _BookCarState extends State<BookCar> {
                           ),
                         ),
                       ),
-
                       SizedBox(
                         height: 8,
                       ),
-
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
@@ -166,23 +148,23 @@ class _BookCarState extends State<BookCar> {
                           ),
                         ),
                       ),
-
                       SizedBox(
                         height: 8,
                       ),
-
                       Expanded(
                         child: Container(
                           child: PageView(
                             physics: BouncingScrollPhysics(),
-                            onPageChanged: (int page){
+                            onPageChanged: (int page) {
                               setState(() {
                                 _currentImage = page;
                               });
                             },
                             children: widget.car.images.map((path) {
                               return Container(
-                                padding: EdgeInsets.symmetric(horizontal: 16,),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
                                 child: Hero(
                                   tag: widget.car.model,
                                   child: Image.asset(
@@ -195,24 +177,21 @@ class _BookCarState extends State<BookCar> {
                           ),
                         ),
                       ),
-
                       widget.car.images.length > 1
-                      ? Container(
-                        margin: EdgeInsets.symmetric(vertical: 16),
-                        height: 30,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: buildPageIndicator(),
-                        ),
-                      )
-                      : Container(),
-
+                          ? Container(
+                              margin: EdgeInsets.symmetric(vertical: 16),
+                              height: 30,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: buildPageIndicator(),
+                              ),
+                            )
+                          : Container(),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-
                             buildPricePerPeriod(
                               "12",
                               "4.350",
@@ -234,16 +213,13 @@ class _BookCarState extends State<BookCar> {
                               "5.100",
                               false,
                             ),
-
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ),
               ),
-              
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
@@ -255,7 +231,6 @@ class _BookCarState extends State<BookCar> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Padding(
                       padding: EdgeInsets.only(top: 16, left: 16, right: 16),
                       child: Text(
@@ -267,10 +242,12 @@ class _BookCarState extends State<BookCar> {
                         ),
                       ),
                     ),
-
                     Container(
                       height: 80,
-                      padding: EdgeInsets.only(top: 8, left: 16,),
+                      padding: EdgeInsets.only(
+                        top: 8,
+                        left: 16,
+                      ),
                       margin: EdgeInsets.only(bottom: 16),
                       child: ListView(
                         physics: BouncingScrollPhysics(),
@@ -285,11 +262,9 @@ class _BookCarState extends State<BookCar> {
                         ],
                       ),
                     ),
-
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -307,7 +282,6 @@ class _BookCarState extends State<BookCar> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 Text(
                   "12 Month",
                   style: TextStyle(
@@ -316,14 +290,11 @@ class _BookCarState extends State<BookCar> {
                     fontSize: 14,
                   ),
                 ),
-
                 SizedBox(
                   height: 4,
                 ),
-
                 Row(
                   children: [
-
                     Text(
                       "USD 4,350",
                       style: TextStyle(
@@ -332,11 +303,9 @@ class _BookCarState extends State<BookCar> {
                         fontSize: 22,
                       ),
                     ),
-
                     SizedBox(
-                      width: 8,
+                      width: 6,
                     ),
-
                     Text(
                       "per month",
                       style: TextStyle(
@@ -344,10 +313,8 @@ class _BookCarState extends State<BookCar> {
                         fontSize: 14,
                       ),
                     ),
-
                   ],
                 ),
-
               ],
             ),
             Container(
@@ -360,7 +327,7 @@ class _BookCarState extends State<BookCar> {
               ),
               child: Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     "Book this car",
                     style: TextStyle(
@@ -378,7 +345,7 @@ class _BookCarState extends State<BookCar> {
     );
   }
 
-  Widget buildPricePerPeriod(String months, String price, bool selected){
+  Widget buildPricePerPeriod(String months, String price, bool selected) {
     return Expanded(
       child: Container(
         height: 110,
@@ -396,7 +363,6 @@ class _BookCarState extends State<BookCar> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Text(
               "$months Month",
               style: TextStyle(
@@ -405,11 +371,9 @@ class _BookCarState extends State<BookCar> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             Expanded(
               child: Container(),
             ),
-
             Text(
               price,
               style: TextStyle(
@@ -418,7 +382,6 @@ class _BookCarState extends State<BookCar> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             Text(
               "USD",
               style: TextStyle(
@@ -426,14 +389,13 @@ class _BookCarState extends State<BookCar> {
                 fontSize: 14,
               ),
             ),
-
           ],
         ),
       ),
     );
   }
 
-  Widget buildSpecificationCar(String title, String data){
+  Widget buildSpecificationCar(String title, String data) {
     return Container(
       width: 130,
       decoration: BoxDecoration(
@@ -442,13 +404,15 @@ class _BookCarState extends State<BookCar> {
           Radius.circular(15),
         ),
       ),
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16,),
+      padding: EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
       margin: EdgeInsets.only(right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           Text(
             title,
             style: TextStyle(
@@ -456,11 +420,9 @@ class _BookCarState extends State<BookCar> {
               fontSize: 14,
             ),
           ),
-
           SizedBox(
             height: 8,
           ),
-
           Text(
             data,
             style: TextStyle(
@@ -469,10 +431,8 @@ class _BookCarState extends State<BookCar> {
               fontWeight: FontWeight.bold,
             ),
           ),
-
         ],
       ),
     );
   }
-
 }
